@@ -1,18 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC&family=Bellota&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <title>StudyFlow School {% block title %}{% endblock %}</title>
+    <script src="https://kit.fontawesome.com/accc161392.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link href="/static/favicon.ico" rel="icon">
+    <title>{% block title %}{% endblock %} | StudyFlow School</title>
 </head>
-<body>
-    <nav class="navbar">
-        <div class="navbar-brand">
-            <div class="navbar-item title">StudyFlow School</div>
+
+<body class="main">
+    <nav class="navbar is-success p-3">
+        <div class="navbar-brand ">
+            <a href="/" class="navbar-item title m-0 p-0 is-shadowless brand">StudyFlow School</a>
+            <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
         </div>
-        <div class="navmar-menu"><div class="navbar-end">navbar-item*</div></div>
+        <div class="navbar-menu" id="navMenu">
+            <div class="navbar-end">
+                <a href="/schedule" class="navbar-item is-tab" id="schedule-link"><i class="fa-regular fa-calendar mr-2"></i>Schedule</a>
+                <a href="/achivements" class="navbar-item is-tab" id="achievements-link"><i class="fa-solid fa-star mr-2"></i>Achivements</a>
+                <a href="/meditation" class="navbar-item is-tab" id="meditation-link"><i class="fa-solid fa-peace mr-2"></i>Meditation</a>
+                <a href="/timer" class="navbar-item is-tab" id="pomodoro-link"><i class="fa-regular fa-clock mr-2"></i></i>Pomodoro Timer</a>
+                <a href="/resources" class="navbar-item is-tab" id="resources-link"><i class="fa-regular fa-file mr-2"></i>Resources</a>
+                <div class="buttons">
+                    {% block login %}{% endblock %}
+                </div>
+            </div>
+        </div>
     </nav>
+    <section class="section is-fullheight is-flex-1 is-flex-grow-1 p-0 m-0">
+        {% block main %}{% endblock %}
+    </section>
+    <footer class="footer p-5">
+        <div class="content has-text-centered"><a href="https://github.com/VedantCholkar" target="_blank" rel="noopener noreferrer">Made by Vedant Cholkar</a> |
+            <a href="/credits">Credits</a>
+        </div>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // Get all "navbar-burger" elements
+            const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+            // Add a click event on each of them
+            $navbarBurgers.forEach(el => {
+                el.addEventListener('click', () => {
+
+                    // Get the target from the "data-target" attribute
+                    const target = el.dataset.target;
+                    const $target = document.getElementById(target);
+
+                    // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+                    el.classList.toggle('is-active');
+                    $target.classList.toggle('is-active');
+
+                });
+            });
+
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentPage = window.location.pathname;
+            const links = document.querySelectorAll('.navbar-item');
+
+            links.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('is-active');
+                }
+            });
+        });
+    </script>
 </body>
+
 </html>

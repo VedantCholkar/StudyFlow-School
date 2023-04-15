@@ -1,0 +1,51 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.brand {
+    background-color: transparent !important;
+    font-family: 'Bellota';
+}
+
+html,
+body {
+    height: 100%;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.section {
+    height: 100%;
+}
+
+.index-hero {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-image: url(/static/hero-img.jpg);
+    background-size: cover;
+}
+
+.has-text-left {
+    margin-right: auto;
+}
+
+.handwriting {
+    font-family: 'Amatic SC';
+}
+
+.title-hero {
+    font-size: 4rem;
+}

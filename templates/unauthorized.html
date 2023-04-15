@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Not Logged In{% endblock %}
+{% block login %}
+    <a href="/login" class="button is-success is-light mx-3"><i class="fa-solid fa-right-to-bracket mr-2"></i>Login</a>
+{% endblock %}
+
+{% block main %}
+<div class="is-flex is-flex-direction-column is-justify-content-center is-align-items-center is-flex-grow-1	section">
+    <div class="title is-1 is-spaced">
+        Login to access now!
+    </div>
+    <div class="subtitle is-3 has-text-grey">
+        401 Unauthorized
+    </div>
+</div>
+{% endblock %}
