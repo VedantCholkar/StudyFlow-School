@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}Resources{% endblock %}
+{% block login %}
+<p class="mx-3 is-unselectable tag is-light is-success is-medium">{{ username }}</p>
+<a href="/logout" class="button is-danger is-light"><i class="fa-solid fa-right-to-bracket mr-2"></i>Logout</a>
+{% endblock %}
+
+{% block main %}
+<div class="is-flex is-justify-content-center is-align-items-center is-flex-direction-column">
+    <div class="hp-title title handwriting is-1 my-6">Resources</div>
+    <div class="columns mx-2 is-multiline">
+        <div class="column">
+            <div class="title">Courses</div>
+            <ul>
+                <li><a href="edx.org">EdX - One of the world’s leading MOOC platforms.</a></li>
+                <li><a href="coursera.org">Coursera - Covers a wide range of academic learning.</a></li>
+                <li><a href="www.openculture.com">Open Culture - One of the best platforms for courses and degrees</a></li>
+            </ul>
+        </div>
+        <div class="column">
+            <div class="title">Study Tools</div>
+            <ul>
+                <li><a href="quizlet.com">Quizlet - Free learning tool and digital flashcard reservoir.</a></li>
+                <li><a href="www.ted.com">Ted Talks - Listen and learn new ideas</a></li>
+                <li><a href="archive.org">Internet Archive - Online library</a></li>
+                <li><a href="studywithme.io/aesthetic-pomodoro-timer">Pomodoro Timer - Study effectively</a></li>
+            </ul>
+        </div>
+        <div class="column">
+            <div class="title">Educational Websites</div>
+            <ul>
+                <li><a href="bigthink.com">BingThink - Discover new ideas</a></li>
+                <li><a href="www.howcast.com">HowCast - A answer to every 'how?'</a></li>
+                <li><a href="www.khanacademy.org">Khan Academy - Best online education tool to learn various subjects</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -34,7 +34,7 @@ body {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    background-image: url(/static/hero-img.jpg);
+    background-image: url(/static/hero-img.webp);
     background-size: cover;
 }
 
@@ -48,4 +48,43 @@ body {
 
 .title-hero {
     font-size: 4rem;
+}
+
+.card-img {
+    object-fit: cover;
+}
+
+.hp-main {
+    height: auto;
+}
+
+.hp-title {
+    position: relative;
+}
+
+.hp-title::before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    width: 7rem;
+    height: 5px;
+    border-radius: 2px;
+    background: #48c78e;
+}
+
+.quote {
+    width: 25%;
+}
+
+@media only screen and (max-width: 1000px) {
+
+    .quote {
+        width: auto;
+        margin: 0 10vw 0 10vw;
+    }
+}
+
+li {
+    margin: 1rem 0 1rem 0;
+    list-style-type: circle;
 }

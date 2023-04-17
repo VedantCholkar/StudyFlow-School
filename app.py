@@ -48,7 +48,17 @@ def load_user(user_id):
 @app.route("/")
 def index():
     if current_user.is_authenticated:
-        return render_template('homepage.html', username=current_user.name)
+        try:
+            category = 'success'
+            api_url = 'https://api.api-ninjas.com/v1/quotes?category={}'.format(category)
+            response = requests.get(api_url, headers={'X-Api-Key': 'hpCwDT4pNvqjSB1N9K2Ngw==rvVHRFb9aIlm5LE9'})
+            if response.status_code == requests.codes.ok:
+                response = response.json()
+                quote = response[0]['quote']
+                author = response[0]['author']
+                return render_template('homepage.html', quote=quote, author=author, username=current_user.name)
+        except:
+            return render_template('homepage.html', quote='Don’t wish it were easier. Wish you were better.', author='Jim Rohn', username=current_user.name)
     else:
         return render_template('index.html')
 
@@ -105,7 +115,6 @@ def callback():
     if not User.get(unique_id):
         User.create(unique_id, users_name, users_email, picture)
     login_user(user)
-    # return render_template("google.html", signin=True)
     return redirect('/')
 
 @app.route("/logout")
@@ -131,6 +140,11 @@ def unauthorized():
 @login_manager.unauthorized_handler
 def unauthorized_callback():
     return redirect(url_for('unauthorized'))
+
+@app.route('/resources')
+@login_required
+def resources():
+    return render_template('resources.html', username=current_user.name)
 
 if __name__ == "__main__":
     app.run(debug=True, ssl_context="adhoc")

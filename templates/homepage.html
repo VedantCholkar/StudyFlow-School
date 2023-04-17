@@ -1,6 +1,17 @@
 {% extends "base.html" %}
 {% block title %}Homepage{% endblock %}
 {% block login %}
-    <p class="mx-3 is-unselectable tag is-light is-success is-medium">{{ username }}</p>
-    <a href="/logout" class="button is-danger is-light"><i class="fa-solid fa-right-to-bracket mr-2"></i>Logout</a>
+<p class="mx-3 is-unselectable tag is-light is-success is-medium">{{ username }}</p>
+<a href="/logout" class="button is-danger is-light"><i class="fa-solid fa-right-to-bracket mr-2"></i>Logout</a>
+{% endblock %}
+
+{% block main %}
+<div class="is-flex is-justify-content-center is-flex-direction-column hp-main is-align-items-center">
+    <div class="title is-1 hp-title handwriting has-text-centered my-6">Welcome {{ username }}</div>
+    <div class="box quote is-centered">
+        <div class="title has-text-black is-2 handwriting is-italic has-text-left">Quote:</div>
+        <div class="has-text-center title is-5 has-text-grey">{{ quote }}</div>
+        <div class="has-text-center subtitle is-5 my-2">by {{ author }}</div>
+    </div>
+</div>
 {% endblock %}
