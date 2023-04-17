@@ -13,7 +13,7 @@ from flask_login import (
 from oauthlib.oauth2 import WebApplicationClient
 import requests
 
-from db import init_db_command
+from db import init_db_command, get_db
 from user import User
 
 
@@ -50,8 +50,10 @@ def index():
     if current_user.is_authenticated:
         try:
             category = 'success'
-            api_url = 'https://api.api-ninjas.com/v1/quotes?category={}'.format(category)
-            response = requests.get(api_url, headers={'X-Api-Key': 'hpCwDT4pNvqjSB1N9K2Ngw==rvVHRFb9aIlm5LE9'})
+            api_url = 'https://api.api-ninjas.com/v1/quotes?category={}'.format(
+                category)
+            response = requests.get(
+                api_url, headers={'X-Api-Key': 'hpCwDT4pNvqjSB1N9K2Ngw==rvVHRFb9aIlm5LE9'})
             if response.status_code == requests.codes.ok:
                 response = response.json()
                 quote = response[0]['quote']
@@ -117,6 +119,7 @@ def callback():
     login_user(user)
     return redirect('/')
 
+
 @app.route("/logout")
 @login_required
 def logout():
@@ -128,23 +131,55 @@ def logout():
 def credits():
     return render_template("credits.html")
 
+
 @app.route('/schedule')
 @login_required
 def schedule():
     return render_template('schedule.html')
 
+
 @app.route('/unauthorized')
 def unauthorized():
     return render_template('unauthorized.html')
+
 
 @login_manager.unauthorized_handler
 def unauthorized_callback():
     return redirect(url_for('unauthorized'))
 
+
 @app.route('/resources')
 @login_required
 def resources():
     return render_template('resources.html', username=current_user.name)
+
+
+@app.route('/timer')
+@login_required
+def timer():
+    return render_template('timer.html', username=current_user.name)
+
+
+@app.route('/pomodoro_finished', methods=['POST'])
+def handle_pomodoro_finished():
+    data = request.json
+    username = data['username']
+    db = get_db()
+    row = db.execute(
+        "SELECT pomodoro_count FROM users WHERE name=?", (username,)
+    ).fetchone()
+    count = row[0]
+    count += 1
+    db.execute(
+        "UPDATE users SET pomodoro_count=? WHERE name=?", (count, username)
+    )
+    db.commit()
+    return '', 204
+
+@app.route('/meditation')
+@login_required
+def meditation():
+    return render_template('meditation.html', ususername=current_user.name)
 
 if __name__ == "__main__":
     app.run(debug=True, ssl_context="adhoc")

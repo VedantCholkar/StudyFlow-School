@@ -2,5 +2,6 @@ CREATE TABLE user (
   id TEXT PRIMARY KEY,
   name TEXT NOT NULL,
   email TEXT UNIQUE NOT NULL,
-  profile_pic TEXT NOT NULL
+  profile_pic TEXT NOT NULL,
+  pomodoro_count INTEGER NOT NULL DEFAULT 0
 );

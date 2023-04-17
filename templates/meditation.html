@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Homepage{% endblock %}
+{% block login %}
+<p class="mx-3 is-unselectable tag is-light is-success is-medium">{{ username }}</p>
+<a href="/logout" class="button is-danger is-light"><i class="fa-solid fa-right-to-bracket mr-2"></i>Logout</a>
+{% endblock %}
+
+{% block main %}
+<div class="main-section">
+        <img src="https://cdn.doyou.com/articles/6a-1575918606525.gif=w1080" alt="meditation image">
+</div>
+{% endblock %}

@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block title %}Homepage{% endblock %}
+{% block login %}
+<p class="mx-3 is-unselectable tag is-light is-success is-medium">{{ username }}</p>
+<a href="/logout" class="button is-danger is-light"><i class="fa-solid fa-right-to-bracket mr-2"></i>Logout</a>
+{% endblock %}

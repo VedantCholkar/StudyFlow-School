@@ -88,3 +88,18 @@ li {
     margin: 1rem 0 1rem 0;
     list-style-type: circle;
 }
+
+.main-section {
+    height: 50rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.timer-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}

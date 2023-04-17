@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}Homepage{% endblock %}
+{% block login %}
+<p class="mx-3 is-unselectable tag is-light is-success is-medium">{{ username }}</p>
+<a href="/logout" class="button is-danger is-light"><i class="fa-solid fa-right-to-bracket mr-2"></i>Logout</a>
+{% endblock %}
+
+{% block main %}
+<div class="main-section">
+    <p id="timer" class="title hp-title is-1 mb-6">25:00</p>
+    <div class="timer-buttons">
+        <button id="start" class="mx-2 button is-primary">Start</button>
+        <button id="stop" class="mx-2 button is-danger">Stop</button>
+        <button id="reset" class="mx-2 button is-warning">Reset</button>
+    </div>
+
+    <script>
+        let timerInterval;
+        let timeLeft = 25 * 60; // 25 minutes in seconds
+        const timerDisplay = document.getElementById('timer');
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                timeLeft--;
+                if (timeLeft < 0) {
+                    clearInterval(timerInterval);
+                    alert('Time is up!');
+                }
+            }, 1000);
+        }
+
+        function stopTimer() {
+            clearInterval(timerInterval);
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            timeLeft = 25 * 60;
+            timerDisplay.textContent = '25:00';
+        }
+
+        document.getElementById('start').addEventListener('click', startTimer);
+        document.getElementById('stop').addEventListener('click', stopTimer);
+        document.getElementById('reset').addEventListener('click', resetTimer);
+
+        fetch('/pomodoro_finished', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: '{{ username }}'
+            })
+        }).then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+        }).catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+    </script>
+</div>
+{% endblock %}
