@@ -20,10 +20,8 @@ from user import User
 from cal_setup import get_calendar_service
 
 
-GOOGLE_CLIENT_ID = '470856820752-ia05df1tns1fvu2bb1iirm500lhlm4ug.apps.googleusercontent.com'
-GOOGLE_CLIENT_SECRET = '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'
-# GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", None)
-# GOOGLE_CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", None)
+GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", None)
+GOOGLE_CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", None)
 GOOGLE_DISCOVERY_URL = (
     "https://accounts.google.com/.well-known/openid-configuration"
 )
