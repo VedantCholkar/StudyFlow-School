@@ -1,6 +1,8 @@
 import json
 import os
 import sqlite3
+import datetime
+
 
 from flask import Flask, redirect, request, url_for, render_template
 from flask_login import (
@@ -15,6 +17,7 @@ import requests
 
 from db import init_db_command, get_db
 from user import User
+from cal_setup import get_calendar_service
 
 
 GOOGLE_CLIENT_ID = '470856820752-ia05df1tns1fvu2bb1iirm500lhlm4ug.apps.googleusercontent.com'
@@ -49,6 +52,11 @@ def load_user(user_id):
 def index():
     if current_user.is_authenticated:
         try:
+            db = get_db()
+            username = current_user.name
+            pomodoro = db.execute(
+                "SELECT pomodoro_count FROM user WHERE name=?", (username,)
+            ).fetchone()
             category = 'success'
             api_url = 'https://api.api-ninjas.com/v1/quotes?category={}'.format(
                 category)
@@ -58,7 +66,7 @@ def index():
                 response = response.json()
                 quote = response[0]['quote']
                 author = response[0]['author']
-                return render_template('homepage.html', quote=quote, author=author, username=current_user.name)
+                return render_template('homepage.html', quote=quote, author=author, username=current_user.name, pcount=pomodoro)
         except:
             return render_template('homepage.html', quote='Don’t wish it were easier. Wish you were better.', author='Jim Rohn', username=current_user.name)
     else:
@@ -132,12 +140,6 @@ def credits():
     return render_template("credits.html")
 
 
-@app.route('/schedule')
-@login_required
-def schedule():
-    return render_template('schedule.html')
-
-
 @app.route('/unauthorized')
 def unauthorized():
     return render_template('unauthorized.html')
@@ -176,10 +178,28 @@ def handle_pomodoro_finished():
     db.commit()
     return '', 204
 
+
 @app.route('/meditation')
 @login_required
 def meditation():
     return render_template('meditation.html', ususername=current_user.name)
+
+
+@app.route('/schedule')
+@login_required
+def schedule():
+    service = get_calendar_service()
+    # Call the Calendar API
+    now = datetime.datetime.utcnow().isoformat() + 'Z'  # 'Z' indicates UTC time
+    events_result = service.events().list(calendarId='primary', timeMin=now,
+                                          maxResults=10, singleEvents=True,
+                                          orderBy='startTime').execute()
+    events = events_result.get('items', [])
+    start = {}
+    if not events:
+        return render_template('schedule.html', events = ['No upcoming events found.'])
+    return render_template('schedule.html', events=events)
+
 
 if __name__ == "__main__":
     app.run(debug=True, ssl_context="adhoc")

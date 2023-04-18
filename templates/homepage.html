@@ -8,10 +8,18 @@
 {% block main %}
 <div class="is-flex is-justify-content-center is-flex-direction-column hp-main is-align-items-center">
     <div class="title is-1 hp-title handwriting has-text-centered my-6">Welcome {{ username }}</div>
-    <div class="box quote is-centered">
-        <div class="title has-text-black is-2 handwriting is-italic has-text-left">Quote:</div>
-        <div class="has-text-center title is-5 has-text-grey">{{ quote }}</div>
-        <div class="has-text-center subtitle is-5 my-2">by {{ author }}</div>
+    <div class="is-flex is-justify-content-center is-flex-direction-row is-align-items-center">
+        <div class="box quote is-centered mx-6">
+            <div class="title has-text-black is-2 handwriting is-italic has-text-left">Quote:</div>
+            <div class="has-text-center title is-5 has-text-grey">{{ quote }}</div>
+            <div class="has-text-center subtitle is-5 my-2">by {{ author }}</div>
+        </div>
+        <div class="box quote is-centered is-danger mx-6">
+            <div class="title has-text-black is-2 handwriting is-italic has-text-left">Pomodoro sessions completed:</div>
+            {% for count in pcount %}
+                <div class="has-text-center title is-1 has-text-success">{{ count }}</div>
+            {% endfor %}
+        </div>
     </div>
 </div>
 {% endblock %}

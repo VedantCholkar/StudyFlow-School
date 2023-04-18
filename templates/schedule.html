@@ -4,3 +4,14 @@
 <p class="mx-3 is-unselectable tag is-light is-success is-medium">{{ username }}</p>
 <a href="/logout" class="button is-danger is-light"><i class="fa-solid fa-right-to-bracket mr-2"></i>Logout</a>
 {% endblock %}
+
+{% block main %}
+<div class="main-section">
+    <div class="title is-1 hp-title handwriting">Upcoming Events</div>
+    <ol>
+        {% for event in events[:5] %}
+            <li class="title is-i">{{ event['summary'] }}</li>
+        {% endfor %}
+    </ol>
+</div>
+{% endblock %}

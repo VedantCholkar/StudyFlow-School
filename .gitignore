@@ -1,2 +1,4 @@
 venv/
 static/client_secret_470856820752-ia05df1tns1fvu2bb1iirm500lhlm4ug.apps.googleusercontent.com.json
+token.pickle
+credentials.json
