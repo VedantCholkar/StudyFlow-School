@@ -18,15 +18,15 @@ Overall, StudyFlow School is an invaluable tool for students who are looking to 
 
 # Installation
 ### Make a Virtual Envirorment
-python3 -m venv venv
+`python3 -m venv venv`
 ### Install the requirements
-pip install -r requirements.txt
+`pip install -r requirements.txt`
 ### Configure the Google API for logging in, Quotes API from API Ninja.
 
 # Useage
-python3 app.py
+`python3 app.py`
 ### You should get 'Initialized database'
-Run python3 app.py again
+Run `python3 app.py` again
 ### The website will be available on https://127.0.0.1:5000
 
 # Project Structure
@@ -34,3 +34,5 @@ Run python3 app.py again
 - templates folder contains HTML templates
 - static folder conatins css and images
 - schema.sql contains the schema of the database 'sqlite_db'
+# License
+[MIT](https://github.com/VedantCholkar/StudyFlow-School/blob/main/LICENSE)
