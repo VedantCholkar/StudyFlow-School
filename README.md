@@ -21,11 +21,11 @@ Overall, StudyFlow School is an invaluable tool for students who are looking to 
 python3 -m venv venv
 ### Install the requirements
 pip install -r requirements.txt
-### Configure the Google API for logging in, Quotes api from API Ninja.
+### Configure the Google API for logging in, Quotes API from API Ninja.
 
 # Useage
 python3 app.py
-### You should get Initialized database
+### You should get 'Initialized database'
 Run python3 app.py again
 ### The website will be available on https://127.0.0.1:5000
 
