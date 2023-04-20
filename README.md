@@ -28,3 +28,9 @@ python3 app.py
 ### You should get Initialized database
 Run python3 app.py again
 ### The website will be available on https://127.0.0.1:5000
+
+# Project Structure
+- app.py contains the main code
+- templates folder contains HTML templates
+- static folder conatins css and images
+- schema.sql contains the schema of the database 'sqlite_db'
